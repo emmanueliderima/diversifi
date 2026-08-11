@@ -1,0 +1,27 @@
+{
+  "name": "diversifi",
+  "private": true,
+  "packageManager": "bun@1.2.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "contracts"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "contracts:compile": "bun --cwd contracts run compile",
+    "contracts:test": "bun --cwd contracts run test"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^26.2.0"
+  }
+}

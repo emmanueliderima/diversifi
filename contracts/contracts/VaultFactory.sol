@@ -1,0 +1,6 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.28;
+import {Clones} from "@openzeppelin/contracts/proxy/Clones.sol";
+import {AssetRegistry} from "./AssetRegistry.sol";
+import {Vault, ISwapAdapter} from "./Vault.sol";
+contract VaultFactory { address public immutable vaultImplementation; AssetRegistry public immutable assetRegistry; ISwapAdapter public immutable swapAdapter; mapping(address=>address) public vaultOf; mapping(address=>bool) public isVault; event VaultCreated(address indexed owner,address indexed vault,address indexed baseAsset); error DuplicateVault(address); error InvalidBaseAsset(address); constructor(address impl,AssetRegistry registry,ISwapAdapter adapter){if(impl==address(0)||address(registry)==address(0)||address(adapter)==address(0)) revert InvalidBaseAsset(address(0));vaultImplementation=impl;assetRegistry=registry;swapAdapter=adapter;} function createVault(Vault.VaultInit calldata init) external returns(address vault){if(vaultOf[msg.sender]!=address(0)) revert DuplicateVault(msg.sender);if(!assetRegistry.isActive(init.baseAsset)) revert InvalidBaseAsset(init.baseAsset);vault=Clones.clone(vaultImplementation);Vault(vault).initialize(msg.sender,assetRegistry,swapAdapter,init,address(this));vaultOf[msg.sender]=vault;isVault[vault]=true;emit VaultCreated(msg.sender,vault,init.baseAsset);}}
