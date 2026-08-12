@@ -1,4 +1,6 @@
 export const BPS_DENOMINATOR = 10_000n;
+/** All USD values in domain objects use this fixed-point precision. */
+export const USD_VALUE_DECIMALS = 18;
 
 export type Address = `0x${string}`;
 
@@ -18,7 +20,12 @@ export interface VaultConstraints {
 
 export interface PortfolioPosition {
   asset: Asset;
+  /** Raw ERC-20 base units, as returned by `balanceOf`. */
   balance: bigint;
+  /** Token/USD oracle answer in `priceDecimals` fixed-point units. */
+  priceUsd: bigint;
+  priceDecimals: number;
+  /** USD value scaled by `USD_VALUE_DECIMALS`. */
   usdValue: bigint;
   allocationBps: bigint;
 }
@@ -26,6 +33,7 @@ export interface PortfolioPosition {
 export interface PortfolioSnapshot {
   vaultAddress: Address;
   positions: PortfolioPosition[];
+  /** Total USD value scaled by `USD_VALUE_DECIMALS`. */
   totalValueUsd: bigint;
   constraints: VaultConstraints;
 }
@@ -56,4 +64,3 @@ export interface RebalanceJob {
   status: RebalanceJobStatus;
   createdAt: Date;
 }
-

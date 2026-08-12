@@ -71,6 +71,8 @@
       "name": "@diversifi/blockchain",
       "version": "0.0.0",
       "dependencies": {
+        "@diversifi/portfolio": "workspace:*",
+        "@diversifi/types": "workspace:*",
         "viem": "^2.23.5",
       },
     },
