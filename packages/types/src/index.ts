@@ -51,6 +51,16 @@ export interface TradeInstruction {
   sellUsdValue: bigint;
 }
 
+/** A positive delta means buy; a negative delta means sell. USD values are 18-decimal fixed point. */
+export interface AllocationDifference {
+  asset: Address;
+  currentUsdValue: bigint;
+  targetUsdValue: bigint;
+  deltaUsdValue: bigint;
+  currentAllocationBps: bigint;
+  targetAllocationBps: bigint;
+}
+
 export interface TradePlan {
   vaultAddress: Address;
   trades: TradeInstruction[];
