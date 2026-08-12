@@ -41,8 +41,14 @@ export interface PortfolioSnapshot {
 export interface AllocationDecision {
   shouldRebalance: boolean;
   targetAllocationBps: Record<Address, bigint>;
-  reasoning: string;
-  confidence: "low" | "medium" | "high";
+  /** Human-readable, non-authoritative rationale for display/audit only. */
+  explanation: string;
+  confidence?: "low" | "medium" | "high";
+}
+
+/** Provider-agnostic boundary. Implementations may propose intent only. */
+export interface AllocationAgent {
+  analyze(snapshot: PortfolioSnapshot): Promise<AllocationDecision>;
 }
 
 export interface TradeInstruction {

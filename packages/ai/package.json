@@ -1,0 +1,13 @@
+{
+  "name": "@diversifi/ai",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": { "build": "tsc -p tsconfig.json", "test": "bun test", "typecheck": "tsc --noEmit -p tsconfig.json" },
+  "dependencies": {
+    "@diversifi/types": "workspace:*",
+    "@diversifi/validation": "workspace:*",
+    "@openrouter/sdk": "^0.4.0"
+  }
+}

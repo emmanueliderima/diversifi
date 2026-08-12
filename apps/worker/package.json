@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": { "dev": "bun --watch src/index.ts", "build": "tsc -p tsconfig.json", "typecheck": "tsc --noEmit -p tsconfig.json" },
-  "dependencies": { "@diversifi/types": "workspace:*" },
+  "dependencies": {
+    "@diversifi/ai": "workspace:*",
+    "@diversifi/types": "workspace:*"
+  },
   "devDependencies": { "@types/bun": "latest" }
 }
-
