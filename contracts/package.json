@@ -5,9 +5,12 @@
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "local:deploy": "hardhat ignition deploy ignition/modules/LocalMvp.ts --network localhost --reset",
+    "local": "powershell -ExecutionPolicy Bypass -File scripts/start-local.ps1"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-ignition": "0.15.11",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "@types/chai": "^5.2.3",
     "chai": "^6.2.2",
